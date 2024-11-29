@@ -59,7 +59,7 @@ def predict():
 
 
 # Load the trained model and label encoders
-varieties_model = joblib.load('varieties_model_rf.pkl')
+# varieties_model = joblib.load('varieties_model_rf.pkl')
 label_encoder_city = joblib.load('label_encoder_city.pkl')
 label_encoder_crop = joblib.load('label_encoder_crop.pkl')
 label_encoder_variety = joblib.load('label_encoder_variety.pkl')
