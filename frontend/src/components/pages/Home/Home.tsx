@@ -85,7 +85,7 @@ const Home: React.FC = () => {
           </div>
         </Link>
 
-        <Link to="/">
+        <Link to="/fertilizer">
           <div className="bg-green-700 text-white p-6 rounded-lg shadow-lg flex items-center justify-center">
             <h3 className="text-lg flex flex-col gap-2 font-semibold">
               {" "}

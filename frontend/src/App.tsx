@@ -11,6 +11,7 @@ import TopCrops from './components/pages/predictions/crop prediction/TopCrops';
 
 // import CropVarieties from "./components/pages/predictions/crop prediction/cropVarieties";
 import CropVarietyFinder from "./components/pages/predictions/crop prediction/CropVarietyFinder";
+import Fertilizer from "./components/pages/predictions/fertilizer prediction/Fertilizer";
 
 const App: React.FC = () => {
   const [isAuthenticated, setIsAuthenticated] = useState<boolean>(false);
@@ -35,7 +36,7 @@ const App: React.FC = () => {
   <Route path="/crop-prediction/top-crops" element={<TopCrops />} />
   <Route path="/" element={isAuthenticated ? <Navigate to="/login" />: <Home /> } />
   <Route path="/cropvarietyfinder" element={<CropVarietyFinder/>} />
-  {/* <Route path="/cropvarieties" element={<CropVarieties/>} /> */}
+  <Route path="/fertilizer" element={<Fertilizer/>} />
   <Route path="*" element={<PageNotFound />} />
 </Routes>
 </div>
