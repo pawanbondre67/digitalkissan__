@@ -4,6 +4,7 @@ import joblib
 import pandas as pd
 import numpy as np
 from flask_cors import CORS
+from sklearn.neighbors import KNeighborsClassifier
 
 app = Flask(__name__)
 CORS(app)
@@ -137,5 +138,46 @@ def predict_variety():
     print(f"Final result:\n{result}")
 
     return jsonify(result)
+
+
+
+# Load the dataset
+data = pd.read_csv("fertilizer.csv")
+
+# Prepare the features and target
+X = data[['N', 'P', 'K', 'Temperature', 'Humidity', 'pH', 'Rainfall']]
+y = data['Fertilizer Name']
+
+# Train the KNN model
+model = KNeighborsClassifier(n_neighbors=3)
+model.fit(X, y)
+
+@app.route("/predict-fertilizer", methods=["POST"])
+def predict_fertilizer():
+    if request.method == "POST":
+        city = request.form.get("city", "").strip().lower()
+
+        # Filter data for the given city
+        city_data = data[data["city"].str.lower() == city]
+
+        if city_data.empty:
+            return jsonify({
+                "city": city.capitalize(),
+                "fertilizer": "No data available for this city."
+            })
+
+        # Use KNN model to predict fertilizers for city data
+        predictions = model.predict(city_data[['N', 'P', 'K', 'Temperature', 'Humidity', 'pH', 'Rainfall']])
+        unique_fertilizers = list(set(predictions))[:2]  # Top 2 fertilizers
+
+        return jsonify({
+            "city": city.capitalize(),
+            "fertilizer": unique_fertilizers
+        })
+
+
+
+
+
 if __name__ == '__main__':
     app.run(debug=True)
