@@ -16,7 +16,7 @@ const Fertilizer : React.FC = () => {
       setError("");
       setResult(null);
 
-      const response = await axios.post("http://127.0.0.1:5000/predict-fertilizer", {
+      const response = await axios.post("https://digitalkissan-cy8p.onrender.com/predict-fertilizer", {
         city,
       }, {
         headers: { "Content-Type": "application/x-www-form-urlencoded" },
